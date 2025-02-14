@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <script src="https://kit.fontawesome.com/c301d92c0f.js" crossorigin="anonymous"></script>
+  <title>Movie</title>
+  <link rel="icon" href="images/title-img.svg" type="image/x-icon">
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- BootStrap -->
+
+
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://apis.google.com/js/client.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script src="../src/index.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ********* Header Starts ********* -->
+  <div id="header" class="">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light"
+      style="background: linear-gradient(90deg,#80D2E4 10%,#016786  50%);">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+
+          <img href="#home" src="images/smoothy2.png" alt="Logo" class="head_img d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <span class="fa fa-bars"></span>
+        </button>
+        <div class="container navbar-collapse" id="navbarNav">
+          <ul class="nav navbar-nav ml-auto d-flex flex-row">
+            <li class="nav-item mx-3">
+                <a class="nav-link" aria-current="page" href="#orders">Orders</a>
+            </li>
+            <li class="nav-item mx-3">
+                <a class="nav-link" href="#support">Support</a>
+            </li>
+        </ul>
+        
+        </div>
+
+      </div>
+
+    </nav>
+
+
+  </div>
+
+<div id="orders" class="container-fluid text-center" style="margin-top: 100px;">
+  <h1 class="display-3 p-3">List of your Orders</h1>
+  <span class="badge bg-secondary my-5">Check the boxes after delivering the order.</span>
+
+  <ul class="list-group">
+    <% data.forEach(item => { %>
+      <form action="/delete" method="post">
+        <div class="item" style="display: flex; align-items: center;">
+          <li class="list-group-item mx-auto" style="width: 75%;">
+            <%= item.title %> : <%= item.quantity%>
+            <i class="fa-sharp fa-solid fa-arrow-right fa-fade"></i>
+            <%= item.user %>
+            <input type="checkbox" class="display-flex mx-5" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+          </li>
+          
+
+        </div>
+      </form>
+      
+    <% }); %>
+  </ul>
+</div>
+
+
+<div id="support">
+  <div class="container-fluid">
+    <footer class="bg-light text-center">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Form -->
+        <section class="">
+          <form onsubmit="openGmail(event)" method="post" enctype="text/plain" class="form-group">
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Contact Us</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="">
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="textArea">Please enter your issues or suggestions.</label>
+                  <textarea name="" id="textArea" class="form-control" cols="20" rows="5"></textarea>
+                </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Email address</label>
+                  <input type="email" id="email" class="form-control" />
+                </div>
+
+              </div>
+              <!--Grid column-->
+
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary mb-4">
+                  Send
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </form>
+        </section>
+        <!-- Section: Form -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-dark" href="">Arya & Ashish</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </div>
+
+</div>
+
+<script>
+  function openGmail(event) {
+    event.preventDefault();
+    const emailAddress = document.getElementById('email').value;
+    const subject = 'Thanks for writing to Us';
+    const message = document.getElementById('textArea').value;
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&body=${message}`;
+    
+    window.open(gmailUrl, '_blank');
+    window.location.href = '#';
+    
+    return false;
+
+  }
+</script> 
+  
+</body>
+</html>
